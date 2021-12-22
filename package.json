@@ -1,0 +1,32 @@
+{
+  "name" : "testrail-wdio-custom-reporter",
+  "description": "Create a run on testrail and the update the test cases results",
+  "version": "1.0.0",
+  "main": "./src/index.js",
+  "scripts": {
+    "star": ""
+  },
+  "keywords": [
+    "wdio-reporter",
+    "wdio",
+    "reporter",
+    "testrail",
+    "wdio-testrail",
+    "reporter-testrail"
+  ],
+  "author": "Luis Diego",
+  "license": "MIT",
+  "dependencies": {
+    "@wdio/reporter": "^7.16.11",
+    "async": "^3.2.2",
+    "axios": "^0.24.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuisDiegoNavas/testrail-wdio-custom-reporter"
+  },
+  "bugs": {
+    "url": "https://github.com/LuisDiegoNavas/testrail-wdio-custom-reporter/issues"
+  },
+  "homepage": "https://github.com/LuisDiegoNavas/testrail-wdio-custom-reporter#readme"
+}
