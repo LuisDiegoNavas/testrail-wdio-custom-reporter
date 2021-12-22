@@ -1,0 +1,1 @@
+# testrail-wdio-custom-reporter
