@@ -10,8 +10,6 @@ let runId,
 let resultsForIT = []
 let testCasesIDs = []
 
-
-
 function getObject(case_id, status_id, comment, defect) {
   return {
     "case_id": case_id,
@@ -154,7 +152,6 @@ module.exports = class CustomReporter extends WDIOReporter {
         'skipped': 0,
         'errors': []
       })
-
      
       async.each(test.tests, function (logs, callback) {
         switch (logs.state) {
@@ -182,7 +179,7 @@ module.exports = class CustomReporter extends WDIOReporter {
       pushResults((test.fullTitle.split(' '))[0].replace('C', ''), values.general, JSON.stringify(values, null, 1))
     }
     else {
-      await sendGetRequest()
+      await updateTestRun()
       await updateTestRunResults()
     }
   };
@@ -190,7 +187,4 @@ module.exports = class CustomReporter extends WDIOReporter {
   get isSynchronised() {
     return resp !== undefined
   }
-  
-
 };
-
