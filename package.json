@@ -1,0 +1,46 @@
+{
+  "_from": "testrail-wdio-custom-reporter@^1.0.0",
+  "_id": "testrail-wdio-custom-reporter@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-iDGKAST4SNlSt1s1/I2syb1Y13vEiCfOsPadXVfA/oDogdarQqzm/H6KDmZI5zoaNXXBO4fkDRpdGURYrON0dw==",
+  "_location": "/testrail-wdio-custom-reporter",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "testrail-wdio-custom-reporter@^1.0.0",
+    "name": "testrail-wdio-custom-reporter",
+    "escapedName": "testrail-wdio-custom-reporter",
+    "rawSpec": "^1.0.0",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.0"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@wdio/reporter": "^7.9.0",
+    "async": "^3.2.1",
+    "axios": "^0.21.1"
+  },
+  "deprecated": false,
+  "description": "create run and add the result for test cases",
+  "homepage": "https://github.com/Kiriago-san/wdio-testrail-reporter#readme",
+  "keywords": [
+    "wdio-reporter",
+    "wdio",
+    "reporter",
+    "testrail",
+    "wdio-testrail",
+    "reporter-testrail"
+  ],
+  "license": "ISC",
+  "main": "./src/index.js",
+  "name": "testrail-wdio-custom-reporter",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuisDiegoNavas/testrail-wdio-custom-reporter"
+  },
+  "scripts": {
+    "test": ""
+  },
+  "version": "1.0.0"
+}
