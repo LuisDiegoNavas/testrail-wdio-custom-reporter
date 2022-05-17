@@ -1,7 +1,7 @@
 {
   "name" : "testrail-wdio-custom-reporter",
   "description": "Create a run on testrail and the update the test cases results",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./src/index.js",
   "scripts": {
     "star": ""
