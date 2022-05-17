@@ -85,12 +85,13 @@ async function pushResults(testID, status, comment) {
 const createTestRun = async () => {
   let date = new Date()
   let title = params.title == undefined ? `${params.runName} ${date.getDate()}.${date.getMonth()} ${date.getHours()}:${date.getMinutes()}` : params.title
+  let boolValue = JSON.parse(params.includeAll);
   axios.post(
     `https://${params.domain}/index.php?/api/v2/add_run/${params.projectId}`,
     {
       suite_id: params.suiteId,
       name: title,
-      include_all: params.includeAll,
+      include_all: boolValue,
     },
     {
       auth: {
