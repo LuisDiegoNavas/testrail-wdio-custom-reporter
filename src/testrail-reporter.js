@@ -144,8 +144,8 @@ module.exports = class CustomReporter extends WDIOReporter {
     super(options)
     params = options;
     
-    if(params.sendReport){
-      if(params.oneReport){
+    if(params.sendReport === 'true'){
+      if(params.oneReport === 'true'){
         getLastTestRun()
       }else{
         createTestRun()
