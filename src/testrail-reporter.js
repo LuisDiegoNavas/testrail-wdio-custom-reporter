@@ -62,7 +62,7 @@ const updateTestRun = async () => {
   }
 };
 
-function pushResults(testID, status, comment) {
+async function pushResults(testID, status, comment) {
   resp = undefined;
   axios.post(
     `https://${params.domain}/index.php?/api/v2/add_result_for_case/${projectId}/${testID}`,
@@ -82,35 +82,78 @@ function pushResults(testID, status, comment) {
 
 }
 
+const createTestRun = async () => {
+  let date = new Date()
+  let title = params.title == undefined ? `${params.runName} ${date.getDate()}.${date.getMonth()} ${date.getHours()}:${date.getMinutes()}` : params.title
+  axios.post(
+    `https://${params.domain}/index.php?/api/v2/add_run/${params.projectId}`,
+    {
+      suite_id: params.suiteId,
+      name: title,
+      include_all: params.includeAll,
+    },
+    {
+      auth: {
+        username: params.username,
+        password: params.apiToken,
+      },
+    },
+  )
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+    .then((response) => {
+      runId = response.data.id
+      console.log(`Create new run "${title}" with id: ${runId}`)
+    })
+};
+
+const getLastTestRun = async () => {
+  let date = new Date()
+  date.setMinutes(date.getMinutes() - 30)
+  date = new Date(date)
+  var unixTimeStamp = Math.floor(date.getTime() / 1000);
+  const resp = await axios.get(
+    `https://${params.domain}/index.php?/api/v2/get_runs/${params.projectId}&is_completed=0&created_after=${unixTimeStamp}`,
+
+    {
+      auth: {
+        username: params.username,
+        password: params.apiToken,
+      },
+    },
+  )
+  .catch(function (error) {
+    console.log(error);
+  })
+  .then((response) => {
+    if (response.data.size > 0){
+      runId = response.data.runs[0].id
+      console.log(`Update test suit: ${runId}`)
+    }else{
+      createTestRun()
+    }
+  })
+
+};
+
 module.exports = class CustomReporter extends WDIOReporter {
   constructor(options) {
     options = Object.assign(options, { stdout: true })
     super(options)
     params = options;
-    let date = new Date()
-    let title = params.title == undefined ? `${params.runName} ${date.getDate()}.${date.getMonth()} ${date.getHours()}:${date.getMinutes()}` : params.title
-    axios.post(
-      `https://${params.domain}/index.php?/api/v2/add_run/${params.projectId}`,
-      {
-        suite_id: params.suiteId,
-        name: title,
-        include_all: false,
-      },
-      {
-        auth: {
-          username: params.username,
-          password: params.apiToken,
-        },
-      },
-    )
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-      .then((response) => {
-        runId = response.data.id
-        this.write(`Run "${title}" created with number ${runId}`);
-      })
+    
+    if(params.sendReport){
+      if(params.oneReport){
+        getLastTestRun()
+      }else{
+        createTestRun()
+      }
+    }else{
+      console.log('Report is not sent!')
+    }
+
   }
   onSuiteStart(test){
   }
