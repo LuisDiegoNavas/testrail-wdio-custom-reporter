@@ -165,7 +165,7 @@ module.exports = class CustomReporter extends WDIOReporter {
   }
 
   onTestFail(test) {
-    resultsForIT.push(getObject((test.title.split(' '))[0].replace('C', ''), 5, `This test case is failed:\n ${test.errors}`))
+    resultsForIT.push(getObject((test.title.split(' '))[0].replace('C', ''), 5, `This test case is failed:\n ${JSON.stringify(test.errors)}`))
     testCasesIDs.push((test.title.split(' '))[0].replace('C', ''))
   }
 
