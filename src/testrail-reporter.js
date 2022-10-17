@@ -34,31 +34,31 @@ const updateTestRunResults = async () => {
         },
       },
     )
-  } catch (err) { 
-      // Handle Error Here
-      console.error(err);
+  } catch (err) {
+    // Handle Error Here
+    console.error(err);
   }
 };
 
 const updateTestRun = async () => {
   try {
-      const resp = await   axios.post(
-        `https://${params.domain}/index.php?/api/v2/update_run/${runId}`,
-        {
-          "case_ids": testCasesIDs,
+    const resp = await axios.post(
+      `https://${params.domain}/index.php?/api/v2/update_run/${runId}`,
+      {
+        "case_ids": testCasesIDs,
+      },
+
+      {
+        auth: {
+          username: params.username,
+          password: params.apiToken,
         },
-    
-        {
-          auth: {
-            username: params.username,
-            password: params.apiToken,
-          },
-        },
-      )
-      //console.log(resp.data);
+      },
+    )
+    //console.log(resp.data);
   } catch (err) {
-      // Handle Error Here
-      console.error(err);
+    // Handle Error Here
+    console.error(err);
   }
 };
 
@@ -100,10 +100,10 @@ const createTestRun = async () => {
       },
     },
   )
-  .catch(function (error) {
-    // handle error
-    console.log(error);
-  })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
     .then((response) => {
       runId = response.data.id
       console.log(`Create new run "${title}" with id: ${runId}`)
@@ -125,17 +125,17 @@ const getLastTestRun = async () => {
       },
     },
   )
-  .catch(function (error) {
-    console.log(error);
-  })
-  .then((response) => {
-    if (response.data.size > 0){
-      runId = response.data.runs[0].id
-      console.log(`Update test suit: ${runId}`)
-    }else{
-      createTestRun()
-    }
-  })
+    .catch(function (error) {
+      console.log(error);
+    })
+    .then(async (response) => {
+      if (response.data.size > 0) {
+        runId = response.data.runs[0].id
+        console.log(`Update test suite: ${runId}`)
+      } else {
+        await createTestRun()
+      }
+    })
 
 };
 
@@ -144,34 +144,34 @@ module.exports = class CustomReporter extends WDIOReporter {
     options = Object.assign(options, { stdout: true })
     super(options)
     params = options;
-    
-    if(params.sendReport === 'true'){
-      if(params.oneReport === 'true'){
+
+    if (params.sendReport === 'true') {
+      if (params.oneReport === 'true') {
         getLastTestRun()
-      }else{
+      } else {
         createTestRun()
       }
-    }else{
+    } else {
       console.log('Report is not sent!')
     }
 
   }
-  onSuiteStart(test){
+  onSuiteStart(test) {
   }
 
   onTestPass(test) {
-      resultsForIT.push(getObject((test.title.split(' '))[0].replace('C', ''), 1, 'This test case is passed'))
-      testCasesIDs.push((test.title.split(' '))[0].replace('C', ''))
+    resultsForIT.push(getObject((test.title.split(' '))[0].replace('C', ''), 1, 'This test case is passed'))
+    testCasesIDs.push((test.title.split(' '))[0].replace('C', ''))
   }
 
   onTestFail(test) {
-      resultsForIT.push(getObject((test.title.split(' '))[0].replace('C', ''), 5, `This test case is failed:\n ${test.errors}`))
-      testCasesIDs.push((test.title.split(' '))[0].replace('C', ''))
+    resultsForIT.push(getObject((test.title.split(' '))[0].replace('C', ''), 5, `This test case is failed:\n ${test.errors}`))
+    testCasesIDs.push((test.title.split(' '))[0].replace('C', ''))
   }
 
   onTestSkip(test) {
-      resultsForIT.push(getObject((test.title.split(' '))[0].replace('C', ''), 4, 'This test case is skipped'))
-      testCasesIDs.push((test.title.split(' '))[0].replace('C', ''))
+    resultsForIT.push(getObject((test.title.split(' '))[0].replace('C', ''), 4, 'This test case is skipped'))
+    testCasesIDs.push((test.title.split(' '))[0].replace('C', ''))
   }
 
   onSuiteEnd(suiteStats) {
@@ -196,7 +196,7 @@ module.exports = class CustomReporter extends WDIOReporter {
         'skipped': 0,
         'errors': []
       })
-     
+
       async.each(test.tests, function (logs, callback) {
         switch (logs.state) {
           case 'failed': values.failed = values.failed + 1;
