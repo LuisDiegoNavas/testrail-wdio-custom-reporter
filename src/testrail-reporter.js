@@ -139,7 +139,7 @@ const getLastTestRun = async () => {
 
 };
 
-module.exports = class CustomReporter extends WDIOReporter {
+module.exports = class TestRailReporter extends WDIOReporter {
   constructor(options) {
     options = Object.assign(options, { stdout: true })
     super(options)
