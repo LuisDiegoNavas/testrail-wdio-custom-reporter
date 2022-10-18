@@ -148,7 +148,7 @@ module.exports = class TestRailReporter extends WDIOReporter {
     params = options;
 
     if (params.sendReport === 'true') {
-      if (params.oneReport === 'true') {
+      if (params.oneReport === 'true' && synced === false) {
         getLastTestRun()
       } else {
         createTestRun()
