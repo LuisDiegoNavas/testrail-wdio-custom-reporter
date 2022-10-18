@@ -6,7 +6,8 @@ const axios = require('axios');
 const async = require('async')
 let runId,
   params,
-  resp;
+  resp,
+  synced;
 let resultsForIT = []
 let testCasesIDs = []
 
@@ -129,12 +130,13 @@ const getLastTestRun = async () => {
       console.log(error);
     })
     .then(async (response) => {
-      if (response.data.size > 0) {
+      if (response.data.size > 0 && synced === false) {
         runId = response.data.runs[0].id
         console.log(`Update test suite: ${runId}`)
       } else {
         await createTestRun()
       }
+      synced = true
     })
 
 };
@@ -156,6 +158,10 @@ module.exports = class TestRailReporter extends WDIOReporter {
     }
 
   }
+  get isSynchronised() {
+    return this.synced
+  }
+
   onSuiteStart(test) {
   }
 
