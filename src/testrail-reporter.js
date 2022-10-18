@@ -159,7 +159,7 @@ module.exports = class TestRailReporter extends WDIOReporter {
 
   }
   get isSynchronised() {
-    return this.synced
+    return synced
   }
 
   onSuiteStart(test) {
