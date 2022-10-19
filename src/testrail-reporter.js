@@ -236,7 +236,4 @@ module.exports = class TestRailReporter extends WDIOReporter {
     }
   };
 
-  get isSynchronised() {
-    return resp !== undefined
-  }
 };
