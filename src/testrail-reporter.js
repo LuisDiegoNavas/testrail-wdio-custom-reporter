@@ -7,7 +7,7 @@ const async = require('async')
 let runId,
   params,
   resp,
-  synced;
+  synced = false;
 let resultsForIT = []
 let testCasesIDs = []
 
