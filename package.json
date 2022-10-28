@@ -1,5 +1,5 @@
 {
-  "name" : "testrail-wdio-custom-reporter",
+  "name" : "wdio-testrail-reporter",
   "description": "Create a run on testrail and the update the test cases results",
   "version": "1.0.0",
   "main": "./src/index.js",
@@ -14,7 +14,7 @@
     "wdio-testrail",
     "reporter-testrail"
   ],
-  "author": "Luis Diego",
+  "author": "Brad DerManouelian",
   "license": "MIT",
   "dependencies": {
     "@wdio/reporter": "^7.16.11",
@@ -23,10 +23,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LuisDiegoNavas/testrail-wdio-custom-reporter"
+    "url": "git+https://github.com/webdriverio-community/wdio-testrail-reporter"
   },
   "bugs": {
-    "url": "https://github.com/LuisDiegoNavas/testrail-wdio-custom-reporter/issues"
+    "url": "https://github.com/webdriverio-community/wdio-testrail-reporter/issues"
   },
-  "homepage": "https://github.com/LuisDiegoNavas/testrail-wdio-custom-reporter#readme"
+  "homepage": "https://github.com/webdriverio-community/wdio-testrail-reporter#readme"
 }
